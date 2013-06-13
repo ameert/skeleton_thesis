@@ -33,9 +33,10 @@
    \LoadClass[pdftex]{book}
 \fi
 
+%make sure we can read your personal stylefile
+\usepackage{UserDefs}
 
 %:-------------------------- packages for fancy things -----------------------
-
 \usepackage{amssymb}
 \usepackage{graphics} % for improved inclusion of graphics
 %\usepackage{wrapfig} % to include figure with text wrapping around it
