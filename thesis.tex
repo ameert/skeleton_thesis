@@ -1,0 +1,219 @@
+% ----------------------------------------------------------------------
+%                   LATEX TEMPLATE FOR PhD THESIS
+% ----------------------------------------------------------------------
+
+% based on Harish Bhanderi's PhD/MPhil template, then Uni Cambridge
+% http://www-h.eng.cam.ac.uk/help/tpl/textprocessing/ThesisStyle/
+% corrected and extended in 2007 by Jakob Suckale, then MPI-CBG PhD programme
+% and made available through OpenWetWare.org - the free biology wiki
+% Modified to conform with University of Pennsylvania Thesis Requirements 
+% by Alan Meert, 2013, Dept. of Physics and Astronomy
+
+%: Style file for Latex
+%: Specify openright if printing double-sided, openany if single-sided
+\documentclass[11pt, openany]{Latex/Classes/PhDthesisPSnPDF}
+\usepackage{lipsum} % this just creates filler text when needed
+
+%: Macro file for Latex
+% A macro that you may use frequently is the figuremacro 
+\include{Latex/Macros/MacroFile1}
+
+%: ----------------------------------------------------------------------
+%:                  TITLE PAGE: name, degree,..\
+% -----------------------------------------------------------------------
+
+%if output to PDF then put the following in PDF header
+\ifpdf  
+    \pdfinfo { /Title  (Thesis)
+               /Creator (TeX)
+               /Producer (pdfTeX)
+               /Author (Your Mom!)
+               /CreationDate (D:YYYYMMDDhhmmss)  %format D:YYYYMMDDhhmmss
+               /ModDate (D:YYYYMMDDhhmmss)
+               /Subject (Better Procrastination)
+               /Keywords (Key to who?) }
+    \pdfcatalog { /PageMode (/UseOutlines)
+                  /OpenAction (fitbh)  }
+\fi
+
+
+\title{\MakeUppercase{My Thesis on stuff}}
+
+% ----------------------------------------------------------------------
+% The section below defines www links/email for author and institutions
+\ifpdf
+  \author{\href{mailto:your_mom@home.com}{Your Mom}}
+  \collegeordept{\href{http://www.physics.upenn.edu}{Physics and
+Astronomy}}
+  \university{\href{http://www.upenn.edu}{University of Pennsylvania}}
+
+  % The crest is a graphics file of the logo of your research institution.
+  % Place it in ./frontmatter/figures and specify the width
+  \crest{\includegraphics[scale=.5]{penn_fulllogo}}
+  
+% If you are not creating a PDF then use the following. The default is PDF.
+\else
+  \author{Me}
+  \collegeordept{Physics and Astronomy}
+  \university{University of Pennsylvania}
+  \crest{\includegraphics[scale=.5]{penn_fulllogo}}
+\fi
+
+\degree{Doctor of Philosophy}
+\degreedate{2014}
+\supervisor[Associate Professor, Physics and Astronomy]{John Smith}
+\gradchair[Professor, Physics and Astronomy]{I.M. Smart}
+
+\firstcomittee{Ben Franklin}
+\secondcomittee{Apollo Creed}
+\thirdcomittee{Rocky}
+\fourthcomittee{Ben Franklin's illegitimate son, William}
+\fifthcomittee{Geroge Washington}
+
+\CopyrightStatement{This work is licensed under the Creative Commons
+Attribution-NonCommercial-ShareAlike 3.0 License.\newline
+\noindent To view a copy of this license, visit
+\href{http://creativecommons.org/licenses/by‐ny‐sa/2.0/}{
+http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
+}
+
+
+%: --------------------------------------------------------------
+%:                  FRONT MATTER: dedications, abstract,..
+% --------------------------------------------------------------
+
+\begin{document}
+
+%\language{english}
+
+% sets line spacing
+\renewcommand\baselinestretch{1.2}
+\baselineskip=18pt plus1pt
+
+
+%: ----------------------- generate cover page ------------------------
+
+\maketitle  % print the title page with above variables
+\makecopyright % print the copyright page 
+
+%: ----------------------- Other Frontmatter --------------------------
+\include{frontmatter/dedication}
+\include{frontmatter/acknowledgement}
+
+%: ----------------------- abstract ------------------------
+
+\include{frontmatter/abstract}
+
+%: ----------------------- contents ------------------------
+
+\setcounter{secnumdepth}{3} % organisational level that receives a numbers
+\setcounter{tocdepth}{3}    % print table of contents for level 3
+\tableofcontents            % print the table of contents
+% levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsection
+
+
+%: ----------------------- list of figures/tables ------------------------
+
+\listoftables  % print list of tables
+\listoffigures	% print list of figures
+
+%: ----------------------- Preface ------------------------
+\include{frontmatter/preface}
+
+
+%: --------------------------------------------------------------
+%:                  MAIN DOCUMENT SECTION
+% --------------------------------------------------------------
+
+\mainmatter
+%\renewcommand{\chaptername}{} % uncomment to print only "1" not "Chapter 1"
+
+\include{introduction/introduction}	
+
+\part{In the Beginning\ldots}
+
+\include{example_chapter/aims}		
+			
+\part{A New Paradigm\ldots}
+
+\include{conclusion/conclusion}  
+
+
+% --------------------------------------------------------------
+%:                  BACK MATTER: appendices, refs,..
+% --------------------------------------------------------------
+
+%: ----------------------- Appendicies ------------------------
+\begin{partChapter}
+\include{backmatter/appendix}
+\end{partChapter}
+
+% --------------------------------------------------------------
+% Set backmatter mode after appendix so that chapter headings are
+% not hidden
+% --------------------------------------------------------------
+
+\backmatter
+
+%: ----------------------- glossary ------------------------
+
+% Tie in external source file for definitions: /backmatter/glossary.tex
+% Glossary entries can also be defined in the main text. See glossary.tex
+\include{backmatter/glossary} 
+
+\clearpage
+\begin{partChapter}
+\begin{multicols}{2} % \begin{multicols}{#columns}[header text][space]
+\begin{footnotesize} % scriptsize(7) < footnotesize(8) < small (9) < normal(10)
+
+\printnomenclature[1.5cm] % [] = distance between entry and description
+\label{nom} % target name for links to glossary
+
+\end{footnotesize}
+\end{multicols}
+\end{partChapter}
+
+
+%: ----------------------- bibliography ------------------------
+
+% PhDbiblio-url2 = names small caps, title bold & hyperlinked, link to page 
+\clearpage
+\begin{partChapter}
+\begin{multicols}{2} % \begin{multicols}{ # columns}[ header text][ space]
+\begin{tiny} % tiny(5) < scriptsize(7) < footnotesize(8) < small (9)
+
+\bibliographystyle{Latex/Classes/PhDbiblio-url2} % Title is link if provided
+\renewcommand{\bibname}{References} % changes the header; default: Bibliography
+
+\bibliography{./backmatter/references} % adjust this to fit your BibTex file
+
+\end{tiny}
+\end{multicols}
+\end{partChapter}
+
+% --------------------------------------------------------------
+% Various bibliography styles exist. Replace above style as desired.
+
+% in-text refs: (1) (1; 2)
+% ref list: alphabetical; author(s) in small caps; initials last name; page(s)
+%\bibliographystyle{Latex/Classes/PhDbiblio-case} % title forced lower case
+%\bibliographystyle{Latex/Classes/PhDbiblio-bold} % title as in bibtex but bold
+%\bibliographystyle{Latex/Classes/PhDbiblio-url} % bold + www link if provided
+
+%\bibliographystyle{Latex/Classes/jmb} % calls style file jmb.bst
+% in-text refs: author (year) without brackets
+% ref list: alphabetical; author(s) in normal font; last name, initials; page(s)
+
+%\bibliographystyle{plainnat} % calls style file plainnat.bst
+% in-text refs: author (year) without brackets
+% (this works with package natbib)
+% --------------------------------------------------------------
+
+
+%: ----------------------- Index ------------------------
+\clearpage
+\begin{partChapter}
+\printindex
+\end{partChapter}
+
+\end{document}
