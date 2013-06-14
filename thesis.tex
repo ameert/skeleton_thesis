@@ -7,16 +7,23 @@
 % corrected and extended in 2007 by Jakob Suckale, then MPI-CBG PhD programme
 % and made available through OpenWetWare.org - the free biology wiki
 % Modified to conform with University of Pennsylvania Thesis Requirements 
-% by Alan Meert, 2013, Dept. of Physics and Astronomy
+% by Alan Meert & David F. Moore, 2013, Dept. of Physics and Astronomy
 
 %: Style file for Latex
 %: Specify openright if printing double-sided, openany if single-sided
 \documentclass[11pt, openany]{Latex/Classes/PhDthesisPSnPDF}
 \usepackage{lipsum} % this just creates filler text when needed
+\usepackage{UserDefs} %Define anything you might want to define in this file.
 
 %: Macro file for Latex
 % A macro that you may use frequently is the figuremacro 
 \include{Latex/Macros/MacroFile1}
+
+%
+% WARNING!!!
+%   Updating anything in this document other than the main document section is highly discouraged!
+%
+
 
 %: ----------------------------------------------------------------------
 %:                  TITLE PAGE: name, degree,..\
@@ -24,10 +31,10 @@
 
 %if output to PDF then put the following in PDF header
 \ifpdf  
-    \pdfinfo { /Title  (Thesis)
+    \pdfinfo { /Title  (\MyTitle)
                /Creator (TeX)
                /Producer (pdfTeX)
-               /Author (Your Mom!)
+               /Author (\Me)
                /CreationDate (D:YYYYMMDDhhmmss)  %format D:YYYYMMDDhhmmss
                /ModDate (D:YYYYMMDDhhmmss)
                /Subject (Better Procrastination)
@@ -36,13 +43,15 @@
                   /OpenAction (fitbh)  }
 \fi
 
-
-\title{\MakeUppercase{My Thesis on stuff}}
-
+\ifx\MySubTitle\undefined
+    \title{\MakeUppercase{\MyTitle}}
+\else
+    \title{\MakeUppercase{\MyTitle}: \\ \small{\MySubTitle}}
+\fi
 % ----------------------------------------------------------------------
-% The section below defines www links/email for author and institutions
+% Update UserDefs.sty instead of editing this part...
 \ifpdf
-  \author{\href{mailto:your_mom@home.com}{Your Mom}}
+  \author{\href{mailto:\MyEmail}{\Me}}
   \collegeordept{\href{http://www.physics.upenn.edu}{Physics and
 Astronomy}}
   \university{\href{http://www.upenn.edu}{University of Pennsylvania}}
@@ -53,22 +62,22 @@ Astronomy}}
   
 % If you are not creating a PDF then use the following. The default is PDF.
 \else
-  \author{Me}
+  \author{\Me}
   \collegeordept{Physics and Astronomy}
   \university{University of Pennsylvania}
   \crest{\includegraphics[scale=.5]{penn_fulllogo}}
 \fi
 
 \degree{Doctor of Philosophy}
-\degreedate{2014}
-\supervisor[Associate Professor, Physics and Astronomy]{John Smith}
-\gradchair[Professor, Physics and Astronomy]{I.M. Smart}
+\degreedate{\MyEndDate}
+\supervisor[\AdvisorTitle]{\MyAdvisor}
+\gradchair[\GradChairTitle]{\GradChair}
 
-\firstcomittee{Ben Franklin}
-\secondcomittee{Apollo Creed}
-\thirdcomittee{Rocky}
-\fourthcomittee{Ben Franklin's illegitimate son, William}
-\fifthcomittee{Geroge Washington}
+\firstcomittee{\MyComOne}
+\secondcomittee{\MyComTwo}
+\thirdcomittee{\MyComThree}
+\fourthcomittee{\MyComFour}
+\fifthcomittee{\MyComFive}
 
 \CopyrightStatement{This work is licensed under the Creative Commons
 Attribution-NonCommercial-ShareAlike 3.0 License.\newline
@@ -89,7 +98,6 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 % sets line spacing
 \renewcommand\baselinestretch{1.2}
 \baselineskip=18pt plus1pt
-
 
 %: ----------------------- generate cover page ------------------------
 
