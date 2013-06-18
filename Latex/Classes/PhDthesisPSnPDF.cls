@@ -8,23 +8,8 @@
 %\NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{Latex/Classes/PhDthesisPSnPDF}[2013/06/01 v1 UPenn PhD thesis class]
 
-%:-------------------------- report or book -----------------------
+%:----------------- use book class as fundamental class ---------------------
 
-%If you want to use a Report style document then uncomment the following 3 lines and comment the below 8 book style lines:
-%\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
-%\ProcessOptions\relax
-%%\LoadClass[a4paper]{report}
-%\ifx\pdfoutput\undefined
-%   \LoadClass[dvips, a4paper]{report}
-%\else
-%   \LoadClass[pdftex, a4paper]{report}
-%\fi
-
-%%Bibliography
-%%uncomment next line to change bibliography name to references for Report document class
-%\renewcommand{\refname}{References}
-
-%If you want to use a Book style document then uncomment the following 3 lines and comment the above 8 report style lines:
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
 \ifx\pdfoutput\undefined
@@ -34,7 +19,7 @@
 \fi
 
 %make sure we can read your personal stylefile
-\usepackage{UserDefs}
+\usepackage{Latex/StyleFiles/UserDefs}
 
 %:-------------------------- packages for fancy things -----------------------
 \usepackage{amssymb}
@@ -74,19 +59,36 @@
                  breaklinks = true,
                  linktocpage,
                  pagebackref,
-                 colorlinks = false,  % was true
-                 linkcolor = blue,
+                 colorlinks=false,  % was true
+                 filecolor = magenta,
+                 linkcolor = brown,
                  urlcolor  = blue,
                  citecolor = red,
                  anchorcolor = green,
                  hyperindex = true,
-                 hyperfigures
+                 %hyperfigures % not needed, figures should be referenced
                  ]{hyperref} 
 
     \DeclareGraphicsExtensions{.png, .jpg, .jpeg, .pdf, .gif} %GIF doesn't work??
     \usepackage[pdftex]{graphicx}
     \pdfcompresslevel=9
     \graphicspath{{frontmatter/figures/PNG/}{frontmatter/figures/PDF/}{frontmatter/figures/}}
+    
+    \pdfinfo { /Title  (\ifx\MySubTitle\undefined
+                           \@title
+                         \else
+                           \@title: \@SubTitle
+                         \fi)
+               /Creator (TeX)
+               /Producer (pdfTeX)
+               /Author (\@author)
+               /CreationDate (D:YYYYMMDDhhmmss)  %format D:YYYYMMDDhhmmss
+               /ModDate (D:YYYYMMDDhhmmss)
+               /Subject (\@PDFSubject)
+               /Keywords (\@PDFkeywords)}
+    \pdfcatalog { /PageMode (/UseOutlines)
+                  /OpenAction (fitbh)  }
+
 \else
     \usepackage[ dvips, 
                  bookmarks,
@@ -95,21 +97,21 @@
                  breaklinks = true,
                  linktocpage,
                  pagebackref,
-                 colorlinks = true,
-                 linkcolor = blue,
+                 colorlinks=false,
+                 filecolor = magenta,
+                 linkcolor = brown,
                  urlcolor  = blue,
                  citecolor = red,
                  anchorcolor = green,
                  hyperindex = true,
-                 hyperfigures
+                 % hyperfigures % not needed, figures should be referenced 
                  ]{hyperref}
 
     \DeclareGraphicsExtensions{.eps, .ps}
     \usepackage{epsfig}
     \usepackage{graphicx}
-    \graphicspath{{frontmatter/figures/EPS/}{frontmatter/figures/}}
+    \graphicspath{{frontmatter/figures/EPS/}{frontmatter/figures/}}    
 \fi
-
 
 %:-------------------------- page layout -----------------------
 
@@ -155,38 +157,54 @@
   \renewcommand{\headrulewidth}{0pt}
 }
 
-%:-------------------------- title page layout -----------------------
-
-% starts roman page numbering at chapter 1
-\renewcommand{\thepage}{\roman{page}}
-
-\newcommand{\submittedtext}{{A thesis submitted for the degree of}}
-
+%: ------------------------------------------------------------------------
 % DECLARATIONS
 % These macros are used to declare arguments needed for the
 % construction of the title page and other preamble.
+%: ------------------------------------------------------------------------
+
+% An optional subtitle, NOTE: title is already defined by the book class
+\def\SubTitle#1{\gdef\@SubTitle{#1}}
+
+% PDF subject and keywords
+\def\PDFSubject#1{\gdef\@PDFSubject{#1}}
+\def\PDFkeywords#1{\gdef\@PDFkeywords{#1}}
+
+% The name of the author (usually the person writing the document!!!)
+\def\author[#1]#2{\gdef\@AuthorEmail{#1} \gdef\@author{#2}}
 
 % The year and term the degree will be officially conferred
-\def\degreedate#1{\gdef\@degreedate{#1}}
+\def\DegreeDate#1{\gdef\@DegreeDate{#1}}
+
 % The full (unabbreviated) name of the degree
 \def\degree#1{\gdef\@degree{#1}}
+
 % The name of your college or department
 \def\collegeordept#1{\gdef\@collegeordept{#1}}
+
 % The name of your University
 \def\university#1{\gdef\@university{#1}}
+
 % Defining the crest
 \def\crest#1{\gdef\@crest{#1}}
+
 % Defining comittee members
 \def\supervisor[#1]#2{\gdef\@supervisortitle{#1} \gdef\@supervisorname{#2}}
 \def\gradchair[#1]#2{\gdef\@gradchairtitle{#1} \gdef\@gradchairname{#2}}
-\def\firstcomittee#1{\gdef\@firstcomittee{#1}}
-\def\secondcomittee#1{\gdef\@secondcomittee{#1}}
-\def\thirdcomittee#1{\gdef\@thirdcomittee{#1}}
-\def\fourthcomittee#1{\gdef\@fourthcomittee{#1}}
-\def\fifthcomittee#1{\gdef\@fifthcomittee{#1}}
+\def\firstcomittee[#1]#2{\gdef\@firstcomitteetitle{#1} \gdef\@firstcomittee{#2}}
+\def\secondcomittee[#1]#2{\gdef\@secondcomitteetitle{#1} \gdef\@secondcomittee{#2}}
+\def\thirdcomittee[#1]#2{\gdef\@thirdcomitteetitle{#1} \gdef\@thirdcomittee{#2}}
+\def\fourthcomittee[#1]#2{\gdef\@fourthcomitteetitle{#1} \gdef\@fourthcomittee{#2}}
+\def\fifthcomittee[#1]#2{\gdef\@fifthcomitteetitle{#1} \gdef\@fifthcomittee{#2}}
+\def\sixthcomittee[#1]#2{\gdef\@sixthcomitteetitle{#1} \gdef\@sixthcomittee{#2}}
+
 % Defining copyright statement
 \def\CopyrightStatement#1{\gdef\@CopyrightStatement{#1}}
 
+
+%: ------------------------------------------------------------------------
+%: --------------------- alwayssingle environment -------------------------
+%: ------------------------------------------------------------------------
 % These macros define an environment for front matter that is always 
 % single column even in a double-column document.
 
@@ -194,6 +212,14 @@
        \@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
        \else\newpage\fi}
        {\if@restonecol\twocolumn\else\newpage\fi}
+
+
+%: ------------------------------------------------------------------------
+%:-------------------------- title page layout -----------------------
+%: ------------------------------------------------------------------------
+
+% starts roman page numbering at chapter 1
+\renewcommand{\thepage}{\roman{page}}
 
 %define title page layout
 \renewcommand{\maketitle}{%
@@ -204,8 +230,13 @@
     \thispagestyle{empty}
 %  \null\vfill
   \begin{center}
-    { \Large {\bfseries {\@title}} \par}
-    {{\@author} \par}
+    { \Large {\bfseries {
+          \ifx\@SubTitle\undefined
+             {\MakeUppercase{\@title}}
+          \else
+             {\MakeUppercase{\@title}: \\ \small{\@SubTitle}}
+          \fi}} \par}
+    {\href{mailto:\@AuthorEmail}{\@author} \par} 
 {\large  \vspace*{3ex}
     {A DISSERTATION \par}
         \vspace*{0.5ex}
@@ -221,7 +252,7 @@
 	\vspace*{0.5ex}
     {\textbf{\@degree} \par}
 	\vspace*{2ex}
-    {\@degreedate \par}
+    {\@DegreeDate \par}
     {\large \vspace*{15mm} {{\@crest} \par} \vspace*{10mm}}
 }%end large
   \end{center}
@@ -231,21 +262,54 @@
 \ & \ \\
 \rule[-0.1in]{2in}{0.007in} & \rule[-0.1in]{2in}{0.007in} \\  
 \@supervisorname & \@gradchairname  \\
-\@supervisortitle & \@gradchairtitle \\
+{\scriptsize \@supervisortitle} & {\scriptsize \@gradchairtitle} \\
 \end{tabular*} \vspace*{1mm} \hrule \vspace*{1mm}
 \noindent \textbf{Dissertation Comittee:}
 \vspace*{1mm}
 
 \noindent \begin{tabular*}{\textwidth}{l l}
-\@firstcomittee & \@secondcomittee \\
-\@thirdcomittee & \@fourthcomittee \\
-\@fifthcomittee &  \\
+\ifx\@firstcomittee\undefined 
+  \relax
+\else
+\@firstcomittee, {\scriptsize \@firstcomitteetitle}
+\fi
+&
+\ifx\@secondcomittee\undefined 
+  \relax
+\else
+\@secondcomittee, {\scriptsize \@secondcomitteetitle}
+\fi
+\\
+\ifx\@thirdcomittee\undefined 
+  \relax
+\else
+\@thirdcomittee, {\scriptsize \@thirdcomitteetitle}
+\fi
+&
+\ifx\@fourthcomittee\undefined 
+  \relax
+\else
+\@fourthcomittee, {\scriptsize \@fourthcomitteetitle}
+\fi
+\\
+\ifx\@fifthcomittee\undefined 
+  \relax
+\else
+\@fifthcomittee, {\scriptsize \@fifthcomitteetitle}
+\fi
+&
+\ifx\@sixthcomittee\undefined 
+  \relax
+\else
+\@sixthcomittee, {\scriptsize \@sixthcomitteetitle}
+\fi
+\\
 \end{tabular*}
 \end{alwayssingle}}
 
-%
-% COPYRIGHT
-%
+%: ------------------------------------------------------------------------
+%: -------------------------------- COPYRIGHT -----------------------------
+%: ------------------------------------------------------------------------
 % The copyright gets its own page.
 
 \def\makecopyright{%
@@ -257,25 +321,28 @@
 \thispagestyle{empty}
 \begin{minipage}[b]{0.9\textwidth}
 \footnotesize\raggedright
-  {\Large {\bfseries {\@title}} \par}
+  {\Large {\bfseries { 
+          \ifx\@SubTitle\undefined
+             {\MakeUppercase{\@title}}
+          \else
+             {\MakeUppercase{\@title}: \\ \small{\@SubTitle}}
+          \fi}} \par}
   {\large  \vspace*{11pt}
   {{Copyright \copyright} \par}}
   {\large  \vspace*{11pt}
-  {{\@degreedate} \par}}
+  {{\@DegreeDate} \par}}
   {\large  \vspace*{11pt}
-  {{\@author} \par}}
+  {\href{mailto:\@AuthorEmail}{\@author} \par}} 
   {\large  \vspace*{11pt}
   {{\@CopyrightStatement} \par}}
 \end{minipage}
 \vspace*{2\baselineskip}
 \cleardoublepage
-
 \end{alwayssingle}}
 
-%:-------------------------- front matter layout -----------------------
-
-% DEDICATION
-%
+%: ------------------------------------------------------------------------
+%: -------------------------- DEDICATION ----------------------------------
+%: ------------------------------------------------------------------------
 % The dedication environment makes sure the dedication gets its
 % own page and is set out in verse format.
 
@@ -292,8 +359,9 @@
 {\end{center} \end{quote} \end{alwayssingle}}
 
 
-% ACKNOWLEDGEMENTS
-%
+%: ------------------------------------------------------------------------
+%: -------------------------- ACKNOWLEDGEMENTS ----------------------------
+%: ------------------------------------------------------------------------
 % The acknowledgements environment puts a large, bold, centered 
 % "Acknowledgements" label at the top of the page. The acknowledgements
 % themselves appear in a quote environment, i.e. tabbed in at both sides, and
@@ -311,34 +379,28 @@
 \begin{quote}}
 {\end{quote}\end{alwayssingle}}
 
-% The acknowledgementslong environment puts a large, bold, centered 
-% "Acknowledgements" label at the top of the page. The acknowledgement itself 
-% does not appears in a quote environment so you can get more in.
 
-\newenvironment{acknowledgementslong}
-{\begin{alwayssingle}\thispagestyle{plain}
-\begin{center}
-\vspace*{1.5cm}
-{\Large \bfseries Acknowledgements}
-\end{center}
-\vspace{0.5cm}\begin{quote}}
-{\end{quote}\end{alwayssingle}}
-
-%ABSTRACT
-%
+%: ------------------------------------------------------------------------
+%: ----------------------------- ABSTRACT ---------------------------------
+%: ------------------------------------------------------------------------
 %The abstract environment puts a large, bold, centered "Abstract" label at
 %the top of the page. The abstract itself appears in a quote environment,
 %i.e. tabbed in at both sides, and on its own page.
 
-\newenvironment{abstracts} {\begin{alwayssingle} 
+\newenvironment{abstracts}{%
+\begin{alwayssingle} 
 \phantomsection\addcontentsline{toc}{chapter}{Abstract}
 \thispagestyle{plain}
   \begin{center}
   {\bfseries  \MakeUppercase{Abstract} \par}
     \vspace*{3ex}
-  {{\@title} \par}
+  { \ifx\@SubTitle\undefined
+             {\@title}
+          \else
+             {{\@title}: {\@SubTitle}}
+          \fi \par}
     \vspace*{0.25ex}
-  {{\@author} \par}
+  {\href{mailto:\@AuthorEmail}{\@author} \par} 
     \vspace*{0.25ex}
   {{\@supervisorname} \par}
   \end{center}
@@ -346,38 +408,36 @@
    }
 {\end{quote}\end{alwayssingle}}
 
-%The abstractlong environment puts a large, bold, centered "Abstract" label at
-%the top of the page. The abstract itself does not appears in a quote
-%environment so you can get more in.
-
-\newenvironment{abstractslong} {\begin{alwayssingle} 
-  \begin{center}
-  \vspace*{1.5cm}
-  {\Large \bfseries  Abstract}
-  \end{center}
-  \vspace{0.5cm} }
-{\end{alwayssingle}}
-
+%: ------------------------------------------------------------------------
+%: ----------------------------- ABSTRACT SEPARATE ------------------------
+%: ------------------------------------------------------------------------
 %The abstractseparate environment is for running of a page with the abstract
 %on including title and author etc as required to be handed in separately
 
 \newenvironment{abstractseparate} {\begin{alwayssingle} 
   \vspace*{-1in}
  \begin{center}
-    { \Large {\bfseries {\@title}} \par}
-    {{\large \vspace*{1ex} \@author} \par}
+    { \Large {\bfseries {
+          \ifx\@SubTitle\undefined
+             {\@title}
+          \else
+             {{\@title}: {\@SubTitle}}
+          \fi}} \par}
+    {{\large \vspace*{1ex} \href{mailto:\@AuthorEmail}{\@author}} \par} 
 {\large \vspace*{1ex}
     {{\@collegeordept} \par}
     {{\@university} \par}
 \vspace*{1ex}
-    {{\it \submittedtext} \par}
+    {{\it A thesis submitted for the degree of} \par}
     {\it {\@degree} \par}
 \vspace*{2ex}
-    {\@degreedate}}
+    {\@DegreeDate}}
   \end{center}}
 {\end{alwayssingle}}
 
-%Preface, if desired
+%: ------------------------------------------------------------------------
+%: ----------------------------- PREFACE ----------------------------------
+%: ------------------------------------------------------------------------
 
 \newenvironment{preface} {\begin{alwayssingle}
 \phantomsection\addcontentsline{toc}{chapter}{Preface}
@@ -389,6 +449,11 @@
   \vspace{0.5ex} \begin{quote}}
 {\end{quote}\end{alwayssingle}}
 
+
+
+%: ------------------------------------------------------------------------
+%: ----------------------------- Part level chapters ----------------------
+%: ------------------------------------------------------------------------
 %Environment used to push chapters to Part level in mainmatter and Backmatter
 %This environment allows the conclusion to be pushed out of
 %the last part, for instance. The environment is not necessary if you 
@@ -397,11 +462,14 @@
 \newenvironment{partChapter} {\renewcommand*{\toclevel@chapter}{-1}} 
 {\renewcommand*{\toclevel@chapter}{0}} 
 
-%:-------------------------- page numbers: roman+arabic -----------------------
- 
+%: ------------------------------------------------------------------------
+%: ---------------------- page numbers: roman+arabic ----------------------
+%: ------------------------------------------------------------------------
 {\newpage\renewcommand{\thepage}{\arabic{page}}\setcounter{page}{1}}
 
-%:-------------------------- Glossary/Abbrev./Symbols -----------------------
+%: ------------------------------------------------------------------------
+%:-------------------------- Glossary/Abbrev./Symbols ---------------------
+%: ------------------------------------------------------------------------
 
 \usepackage[intoc]{nomencl} % load nomencl extension; include in TOC
 \nomrefpage % to include page numbers after abbrevations
@@ -426,11 +494,13 @@
 	     \item[\textbf{Acronyms}]}%              Z - Acronyms
               			{{}}}}}}}}}}
 
-
-%:-------------------------- Index -----------------------
+%: ------------------------------------------------------------------------
+%: --------------------------------- Index --------------------------------
+%: ------------------------------------------------------------------------
 \usepackage{makeidx}
 \makeindex
 
-
-%:--------------------------Appendicies-------------------
+%: ------------------------------------------------------------------------
+%:------------------------------- Appendicies -----------------------------
+%: ------------------------------------------------------------------------
 \usepackage[page, title, header]{appendix}

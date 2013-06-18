@@ -9,132 +9,123 @@
 % Modified to conform with University of Pennsylvania Thesis Requirements 
 % by Alan Meert & David F. Moore, 2013, Dept. of Physics and Astronomy
 
+%: --------------------------------------------------------------------------
 %: Style file for Latex
 %: Specify openright if printing double-sided, openany if single-sided
+%: --------------------------------------------------------------------------
 \documentclass[11pt, openany]{Latex/Classes/PhDthesisPSnPDF}
 \usepackage{lipsum} % this just creates filler text when needed
-\usepackage{UserDefs} %Define anything you might want to define in this file.
 
-%: Macro file for Latex
-% A macro that you may use frequently is the figuremacro 
-\include{Latex/Macros/MacroFile1}
 
-%
-% WARNING!!!
-%   Updating anything in this document other than the main document section is highly discouraged!
-%
+%: --------------------------------------------------------------------------
+%: The end user may modify these files to personalize and define macros
+%: --------------------------------------------------------------------------
+\usepackage{Latex/StyleFiles/UserDefs} % Define any user-defined Macros and functions in this file.
+\include{Latex/Macros/MacroFile1} % Some prewritten Macros for Use in Latex
 
 
 %: ----------------------------------------------------------------------
-%:                  TITLE PAGE: name, degree,..\
+%:                  User information
 % -----------------------------------------------------------------------
 
-%if output to PDF then put the following in PDF header
-\ifpdf  
-    \pdfinfo { /Title  (\MyTitle)
-               /Creator (TeX)
-               /Producer (pdfTeX)
-               /Author (\Me)
-               /CreationDate (D:YYYYMMDDhhmmss)  %format D:YYYYMMDDhhmmss
-               /ModDate (D:YYYYMMDDhhmmss)
-               /Subject (Better Procrastination)
-               /Keywords (Key to who?) }
-    \pdfcatalog { /PageMode (/UseOutlines)
-                  /OpenAction (fitbh)  }
-\fi
+% DISSERTATION TITLE
+\title{Puns!} %The title of your thesis
+% Optional Sub-title
+\SubTitle{more delicious, witty puns!} %comment if you don't want a subtitle
 
-\ifx\MySubTitle\undefined
-    \title{\MakeUppercase{\MyTitle}}
-\else
-    \title{\MakeUppercase{\MyTitle}: \\ \small{\MySubTitle}}
-\fi
-% ----------------------------------------------------------------------
-% Update UserDefs.sty instead of editing this part...
-\ifpdf
-  \author{\href{mailto:\MyEmail}{\Me}}
-  \collegeordept{\href{http://www.physics.upenn.edu}{Physics and
-Astronomy}}
-  \university{\href{http://www.upenn.edu}{University of Pennsylvania}}
+% PDF information
+\PDFSubject{Physics}
+\PDFkeywords{science, dogs, rainbows}
 
-  % The crest is a graphics file of the logo of your research institution.
-  % Place it in ./frontmatter/figures and specify the width
-  \crest{\includegraphics[scale=.5]{penn_fulllogo}}
-  
-% If you are not creating a PDF then use the following. The default is PDF.
-\else
-  \author{\Me}
-  \collegeordept{Physics and Astronomy}
-  \university{University of Pennsylvania}
-  \crest{\includegraphics[scale=.5]{penn_fulllogo}}
-\fi
+%YOU 
+\author[so_fat@ghetto.com]{Your Mom} %[your email address]{your name}
 
+% Degree information
+\DegreeDate{2154} % expected year of graduation.
 \degree{Doctor of Philosophy}
-\degreedate{\MyEndDate}
-\supervisor[\AdvisorTitle]{\MyAdvisor}
-\gradchair[\GradChairTitle]{\GradChair}
 
-\firstcomittee{\MyComOne}
-\secondcomittee{\MyComTwo}
-\thirdcomittee{\MyComThree}
-\fourthcomittee{\MyComFour}
-\fifthcomittee{\MyComFive}
+%YOUR DEPARTMENT and UNIVERSITY
+\collegeordept{\href{http://www.physics.upenn.edu}{Physics and Astronomy}}
+\university{\href{http://www.upenn.edu}{University of Pennsylvania}}
+% the university crest of your choice. Place it in ./frontmatter/figures
+\crest{\includegraphics[scale=.5]{penn_fulllogo}}
 
+
+%YOUR ADVISOR
+\supervisor[Professor, Physics and Astronomy]{I.M. Smart}
+
+% Your Department Graduate chair
+\gradchair[Professor, Physics and Astronomy]{R.U. Stupid}
+
+% Additional Comitee Members [title]{Name}
+% Up to 6 members are allowed, comment out unusued members
+% Members beyond 6 require modification of class file.
+\firstcomittee[Professor, Physics and Astronomy]{Doc 1}
+\secondcomittee[Professor, Physics and Astronomy]{Doc 2}
+\thirdcomittee[Professor, Physics and Astronomy]{Doc 3}
+\fourthcomittee[Professor, Physics and Astronomy]{Doc 4}
+\fifthcomittee[Professor, Physics and Astronomy]{Doc 5}
+\sixthcomittee[Professor, Physics and Astronomy]{Doc 6}
+
+
+% Copyright statement of your choice
 \CopyrightStatement{This work is licensed under the Creative Commons
 Attribution-NonCommercial-ShareAlike 3.0 License.\newline
 \noindent To view a copy of this license, visit
-\href{http://creativecommons.org/licenses/by‐ny‐sa/2.0/}{
+\href{http://creativecommons.org/licenses/by‐ny‐sa/2.0/}{%
 http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 }
 
-
 %: --------------------------------------------------------------
-%:                  FRONT MATTER: dedications, abstract,..
+%:                  BEGIN THE DOCUMENT!!!
 % --------------------------------------------------------------
-
 \begin{document}
-
-%\language{english}
 
 % sets line spacing
 \renewcommand\baselinestretch{1.2}
 \baselineskip=18pt plus1pt
 
-%: ----------------------- generate cover page ------------------------
+%: ------------------------------------------------------------------------
+%:                  FRONT MATTER: dedications, abstract,..
+% -------------------------------------------------------------------------
 
-\maketitle  % print the title page with above variables
-\makecopyright % print the copyright page 
+%: ----------------------- generate cover page ----------------------------
+\maketitle  
 
-%: ----------------------- Other Frontmatter --------------------------
+%: ----------------------- generate copyright page ------------------------
+\makecopyright  
+
+%: ----------------------- Include a Dedication ---------------------------
 \include{frontmatter/dedication}
+
+%: ----------------------- Include an Acknowledgement ---------------------
 \include{frontmatter/acknowledgement}
 
-%: ----------------------- abstract ------------------------
-
+%: ----------------------- abstract ---------------------------------------
 \include{frontmatter/abstract}
 
-%: ----------------------- contents ------------------------
-
+%: ----------------------- generate Table of Contents ---------------------
 \setcounter{secnumdepth}{3} % organisational level that receives a numbers
 \setcounter{tocdepth}{3}    % print table of contents for level 3
 \tableofcontents            % print the table of contents
 % levels are: 0 - chapter, 1 - section, 2 - subsection, 3 - subsection
 
 
-%: ----------------------- list of figures/tables ------------------------
-
+%: ----------------------- generate list of tables ------------------------
 \listoftables  % print list of tables
-\listoffigures	% print list of figures
 
-%: ----------------------- Preface ------------------------
+%: ----------------------- generate list of figures ------------------------
+\listoffigures	
+
+%: ----------------------- Preface -----------------------------------------
 \include{frontmatter/preface}
 
 
-%: --------------------------------------------------------------
+%: -------------------------------------------------------------------------
 %:                  MAIN DOCUMENT SECTION
-% --------------------------------------------------------------
+% --------------------------------------------------------------------------
 
 \mainmatter
-%\renewcommand{\chaptername}{} % uncomment to print only "1" not "Chapter 1"
 
 \include{introduction/introduction}	
 
@@ -146,7 +137,6 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 
 \include{conclusion/conclusion}  
 
-
 % --------------------------------------------------------------
 %:                  BACK MATTER: appendices, refs,..
 % --------------------------------------------------------------
@@ -157,8 +147,8 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 \end{partChapter}
 
 % --------------------------------------------------------------
-% Set backmatter mode after appendix so that chapter headings are
-% not hidden
+% backmatter mode set after appendix 
+% any chapters beyond here have chapter number supressed
 % --------------------------------------------------------------
 
 \backmatter
@@ -182,9 +172,28 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 \end{partChapter}
 
 
+% --------------------------------------------------------------
 %: ----------------------- bibliography ------------------------
+% --------------------------------------------------------------
+% Various bibliography styles exist. Replace style as desired.
 
+% For the following 4 bibliography styles:
+% in-text refs: (1) (1; 2)
+% ref list: alphabetical; author(s) in small caps; initials last name; page(s)
+% PhDbiblio-case = title forced lower case
+% PhDbiblio-bold = title as in bibtex but bold
+% PhDbiblio-url = bold + www link if provided
 % PhDbiblio-url2 = names small caps, title bold & hyperlinked, link to page 
+
+% jmb = calls style file jmb
+% in-text refs: author (year) without brackets
+% ref list: alphabetical; author(s) in normal font; last name, initials; page(s)
+
+%\bibliographystyle{plainnat} % calls style file plainnat.bst
+% in-text refs: author (year) without brackets
+% (this works with package natbib)
+% --------------------------------------------------------------
+
 \clearpage
 \begin{partChapter}
 \begin{multicols}{2} % \begin{multicols}{ # columns}[ header text][ space]
@@ -199,23 +208,6 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 \end{multicols}
 \end{partChapter}
 
-% --------------------------------------------------------------
-% Various bibliography styles exist. Replace above style as desired.
-
-% in-text refs: (1) (1; 2)
-% ref list: alphabetical; author(s) in small caps; initials last name; page(s)
-%\bibliographystyle{Latex/Classes/PhDbiblio-case} % title forced lower case
-%\bibliographystyle{Latex/Classes/PhDbiblio-bold} % title as in bibtex but bold
-%\bibliographystyle{Latex/Classes/PhDbiblio-url} % bold + www link if provided
-
-%\bibliographystyle{Latex/Classes/jmb} % calls style file jmb.bst
-% in-text refs: author (year) without brackets
-% ref list: alphabetical; author(s) in normal font; last name, initials; page(s)
-
-%\bibliographystyle{plainnat} % calls style file plainnat.bst
-% in-text refs: author (year) without brackets
-% (this works with package natbib)
-% --------------------------------------------------------------
 
 
 %: ----------------------- Index ------------------------
@@ -224,4 +216,8 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 \printindex
 \end{partChapter}
 
+
+%: --------------------------------------------------------------
+%:                     END OF DOCUMENT!!!
+% --------------------------------------------------------------
 \end{document}
