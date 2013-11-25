@@ -117,11 +117,11 @@
 
 %Letter settings
 \ifpdf
-   \pdfpageheight=8.5in
-   \pdfpagewidth=11in
+   \pdfpageheight=11in
+   \pdfpagewidth=8.5in
 \else
-   \setlength{\paperheight}{8.5in}
-   \setlength{\paperwidth}{11in}
+   \setlength{\paperheight}{11in}
+   \setlength{\paperwidth}{8.5in}
 \fi
 
 % Margins as specified in the UPenn Guidlines
