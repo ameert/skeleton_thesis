@@ -16,6 +16,17 @@
 \documentclass[11pt, openany]{Latex/Classes/PhDthesisPSnPDF}
 \usepackage{lipsum} % this just creates filler text when needed
 
+%: --------------------------------------------------------------------------
+%: Use Natbib for non-standard citations 
+%: --------------------------------------------------------------------------
+%: uncomment below to change from standard TeX in-text citations to
+%: author-year in-text citations. Should be used together with the 
+%: PhDbiblio-intext-twoauth.bst file (included with this project) or 
+%: some other acceptable .bst file 
+%: --------------------------------------------------------------------------
+
+%\usepackage[authoryear]{natbib}
+%  \bibpunct{(}{)}{;}{a}{}{,}
 
 %: --------------------------------------------------------------------------
 %: The end user may modify these files to personalize and define macros
@@ -184,6 +195,7 @@ http://creativecommons.org/licenses/by‐ny‐sa/2.0/}
 % PhDbiblio-bold = title as in bibtex but bold
 % PhDbiblio-url = bold + www link if provided
 % PhDbiblio-url2 = names small caps, title bold & hyperlinked, link to page 
+% PhDbiblio-intext-twoauth= similar to PhDBiblio, with intext author citations 
 
 % jmb = calls style file jmb
 % in-text refs: author (year) without brackets
