@@ -185,9 +185,6 @@
 % The name of your University
 \def\university#1{\gdef\@university{#1}}
 
-% Defining the crest
-\def\crest#1{\gdef\@crest{#1}}
-
 % Defining comittee members
 \def\supervisor[#1]#2{\gdef\@supervisortitle{#1} \gdef\@supervisorname{#2}}
 \def\gradchair[#1]#2{\gdef\@gradchairtitle{#1} \gdef\@gradchairname{#2}}
@@ -253,7 +250,6 @@
     {\textbf{\@degree} \par}
 	\vspace*{2ex}
     {\@DegreeDate \par}
-    {\large \vspace*{15mm} {{\@crest} \par} \vspace*{10mm}}
 }%end large
   \end{center}
   \hrule \vspace*{1mm}
@@ -267,44 +263,42 @@
 \noindent \textbf{Dissertation Comittee:}
 \vspace*{1mm}
 
-\noindent \begin{tabular*}{\textwidth}{l l}
 \ifx\@firstcomittee\undefined 
   \relax
 \else
-\@firstcomittee, {\scriptsize \@firstcomitteetitle}
+\noindent\@firstcomittee, {\small \@firstcomitteetitle}
 \fi
-&
+\\
 \ifx\@secondcomittee\undefined 
   \relax
 \else
-\@secondcomittee, {\scriptsize \@secondcomitteetitle}
+\@secondcomittee, {\small \@secondcomitteetitle}
 \fi
 \\
 \ifx\@thirdcomittee\undefined 
   \relax
 \else
-\@thirdcomittee, {\scriptsize \@thirdcomitteetitle}
+\@thirdcomittee, {\small \@thirdcomitteetitle}
 \fi
-&
+\\
 \ifx\@fourthcomittee\undefined 
   \relax
 \else
-\@fourthcomittee, {\scriptsize \@fourthcomitteetitle}
+\@fourthcomittee, {\small \@fourthcomitteetitle}
 \fi
 \\
 \ifx\@fifthcomittee\undefined 
   \relax
 \else
-\@fifthcomittee, {\scriptsize \@fifthcomitteetitle}
+\@fifthcomittee, {\small \@fifthcomitteetitle}
 \fi
-&
+\\
 \ifx\@sixthcomittee\undefined 
   \relax
 \else
-\@sixthcomittee, {\scriptsize \@sixthcomitteetitle}
+\@sixthcomittee, {\small \@sixthcomitteetitle}
 \fi
 \\
-\end{tabular*}
 \end{alwayssingle}}
 
 %: ------------------------------------------------------------------------
@@ -328,7 +322,7 @@
              {\MakeUppercase{\@title}: \\ \small{\@SubTitle}}
           \fi}} \par}
   {\large  \vspace*{11pt}
-  {{Copyright \copyright} \par}}
+  {{COPYRIGHT \copyright} \par}}
   {\large  \vspace*{11pt}
   {{\@DegreeDate} \par}}
   {\large  \vspace*{11pt}
