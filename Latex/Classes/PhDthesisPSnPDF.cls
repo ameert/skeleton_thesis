@@ -369,9 +369,8 @@
 \vspace*{1.5cm}
 {\Large \bfseries Acknowledgements}
 \end{center}
-\vspace{0.5cm}
-\begin{quote}}
-{\end{quote}\end{alwayssingle}}
+\vspace{0.5cm}}
+{\end{alwayssingle}}
 
 
 %: ------------------------------------------------------------------------
@@ -398,9 +397,8 @@
     \vspace*{0.25ex}
   {{\@supervisorname} \par}
   \end{center}
-  \vspace{1ex}\begin{quote}
-   }
-{\end{quote}\end{alwayssingle}}
+  \vspace{1ex}}
+{\end{alwayssingle}}
 
 %: ------------------------------------------------------------------------
 %: ----------------------------- ABSTRACT SEPARATE ------------------------
