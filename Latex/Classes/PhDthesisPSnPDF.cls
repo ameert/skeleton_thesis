@@ -37,7 +37,14 @@
 \setlength{\columnsep}{20pt} 
 \usepackage[numbib]{tocbibind} % correct page numbers for bib in TOC
 %\usepackage{nextpage}
+\usepackage{savesym}
 \usepackage{wasysym} % contains many useful symbols, astro and otherwise...
+\savesymbol{iint}
+\savesymbol{iiint}
+\usepackage{amsmath}
+\restoresymbol{wasysym}{iint} 
+\restoresymbol{wasysym}{iiint} 
+
 
 % ---------------------------------------------------------------------------
        
