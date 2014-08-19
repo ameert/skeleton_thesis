@@ -22,3 +22,7 @@ Go to this site to verify that all specifications are up-to-date.
 
 The formatting requirements for the Dept. of Physics and Astronomy are the
 standard requirements of the university, but be sure to double-check this!!!
+
+-Usage
+Write your chapters following the structure of the example_chapter. Include them in the topfile "thesis.tex." Then compile using the make file "make all" will compile to pdf creating a dvi, ps and pdf copy. There is a make clean and make clobber to clean the directories.
+
