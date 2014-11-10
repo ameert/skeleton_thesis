@@ -238,7 +238,7 @@
           \ifx\@SubTitle\undefined
              {\MakeUppercase{\@title}}
           \else
-             {\MakeUppercase{\@title}: \\ \small{\@SubTitle}}
+          {\MakeUppercase{\@title}: \\ \small{\MakeUppercase{\@SubTitle}}}
           \fi}} \par}
     {\href{mailto:\@AuthorEmail}{\@author} \par} 
 {\large  \vspace*{3ex}
@@ -325,7 +325,7 @@
           \ifx\@SubTitle\undefined
              {\MakeUppercase{\@title}}
           \else
-             {\MakeUppercase{\@title}: \\ \small{\@SubTitle}}
+          {\MakeUppercase{\@title}: \\ \small{\MakeUppercase{\@SubTitle}}}
           \fi}} \par}
   {\large  \vspace*{11pt}
   {{COPYRIGHT \copyright} \par}}
@@ -390,9 +390,9 @@
   {\bfseries  \MakeUppercase{Abstract} \par}
     \vspace*{3ex}
   { \ifx\@SubTitle\undefined
-             {\@title}
+    {\MakeUppercase{\@title}}
           \else
-             {{\@title}: {\@SubTitle}}
+          {{\MakeUppercase{\@title}}: {\MakeUppercase{\@SubTitle}}}
           \fi \par}
     \vspace*{0.25ex}
   {\href{mailto:\@AuthorEmail}{\@author} \par} 
@@ -413,9 +413,9 @@
  \begin{center}
     { \Large {\bfseries {
           \ifx\@SubTitle\undefined
-             {\@title}
+          {\MakeUppercase{\@title}}
           \else
-             {{\@title}: {\@SubTitle}}
+          {{\MakeUppercase{\@title}}: {\MakeUppercase{\@SubTitle}}}
           \fi}} \par}
     {{\large \vspace*{1ex} \href{mailto:\@AuthorEmail}{\@author}} \par} 
 {\large \vspace*{1ex}
