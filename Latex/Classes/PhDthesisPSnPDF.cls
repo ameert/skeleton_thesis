@@ -320,7 +320,6 @@
     \renewcommand{\footnoterule}{\relax}
 \clearpage\null\vfill
 \thispagestyle{empty}
-\begin{minipage}[b]{0.9\textwidth}
 \footnotesize\raggedright
   {\Large {\bfseries { 
           \ifx\@SubTitle\undefined
@@ -336,7 +335,6 @@
   {\href{mailto:\@AuthorEmail}{\@author} \par}} 
   {\large  \vspace*{11pt}
   {{\@CopyrightStatement} \par}}
-\end{minipage}
 \vspace*{2\baselineskip}
 \cleardoublepage
 \end{alwayssingle}}
@@ -356,17 +354,15 @@
   {\LARGE }
   \end{center}
   \vspace{0.5cm}
-  \begin{quote} \begin{center}}
-{\end{center} \end{quote} \end{alwayssingle}}
+  \begin{center}}
+{\end{center} \end{alwayssingle}}
 
 
 %: ------------------------------------------------------------------------
 %: -------------------------- ACKNOWLEDGEMENTS ----------------------------
 %: ------------------------------------------------------------------------
 % The acknowledgements environment puts a large, bold, centered 
-% "Acknowledgements" label at the top of the page. The acknowledgements
-% themselves appear in a quote environment, i.e. tabbed in at both sides, and
-% on its own page.
+% "Acknowledgements" label at the top of the page. 
 
 \newenvironment{acknowledgements}
 {\begin{alwayssingle}
@@ -384,8 +380,7 @@
 %: ----------------------------- ABSTRACT ---------------------------------
 %: ------------------------------------------------------------------------
 %The abstract environment puts a large, bold, centered "Abstract" label at
-%the top of the page. The abstract itself appears in a quote environment,
-%i.e. tabbed in at both sides, and on its own page.
+%the top of the page. 
 
 \newenvironment{abstracts}{%
 \begin{alwayssingle} 
@@ -445,8 +440,8 @@
   \vspace*{2ex}
   {\Large \bfseries  Preface}
   \end{center}
-  \vspace{0.5ex} \begin{quote}}
-{\end{quote}\end{alwayssingle}}
+  \vspace{0.5ex}}
+{\end{alwayssingle}}
 
 
 
