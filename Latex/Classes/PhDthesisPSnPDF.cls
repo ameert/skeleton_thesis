@@ -259,14 +259,16 @@
     {\@DegreeDate \par}
 }%end large
   \end{center}
-  \hrule \vspace*{1mm}
+  \vspace*{1mm}
 \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lr}
 \textbf{Supervisor of Dissertation} & \textbf{Graduate Group Chairperson}\\
 \ & \ \\
 \rule[-0.1in]{2in}{0.007in} & \rule[-0.1in]{2in}{0.007in} \\  
 \@supervisorname & \@gradchairname  \\
 {\scriptsize \@supervisortitle} & {\scriptsize \@gradchairtitle} \\
-\end{tabular*} \vspace*{1mm} \hrule \vspace*{1mm}
+\end{tabular*} \vspace*{1mm} 
+\hfill \\
+\vspace*{1mm}
 \noindent \textbf{Dissertation Comittee:}
 \vspace*{1mm}
 
