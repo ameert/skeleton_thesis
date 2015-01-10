@@ -44,6 +44,8 @@
 \usepackage{amsmath}
 \restoresymbol{wasysym}{iint} 
 \restoresymbol{wasysym}{iiint} 
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
 
 
 % ---------------------------------------------------------------------------
